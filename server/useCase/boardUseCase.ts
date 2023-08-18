@@ -121,7 +121,7 @@ const countthree = async () => {
   }
 };
 
-const randomPositionbefore: number[] = [];
+let randomPositionafter: number[] = [];
 let count = 0;
 let turndeluxe = 1;
 let turn = 1;
@@ -134,7 +134,7 @@ const advanceBoard = async (
   turnclour: number,
   recursive: boolean
 ) => {
-  randomPositionbox.push(randomPositionbefore);
+  randomPositionbox.push(randomPositionafter);
   turnbox.push(turndeluxe);
   if (onoff === 1) {
     let pass = 0;
@@ -166,10 +166,12 @@ const advanceBoard = async (
     const candidate = countCandidates();
     if (recursive && candidate !== 0) {
       const randomPositionbefore = await countthree();
+
       // console.log('こっち来ている');
-      // console.log(randomPositionafter);
+      console.log('randomPositionbefore', randomPositionbefore);
       if (randomPositionbefore !== undefined) {
-        const randomPositionafter = randomPositionbefore;
+        randomPositionafter = randomPositionbefore;
+        console.log('randomPositionafter', randomPositionafter);
 
         turndeluxe = turn;
         // setTimeout(function () {
