@@ -28,6 +28,7 @@ export const githubEventRepo = {
   createRemote: async (app: InitAppModel) => {
     await waitApiCallingLimit();
 
+    console.log('create remote start');
     const repoName = app.displayId;
     const urls = indexToUrls(app.index);
 
@@ -43,6 +44,12 @@ export const githubEventRepo = {
       [
         { name: 'CNAME', value: new URL(urls.site).host },
         { name: 'API_ORIGIN', value: displayIdToApiOrigin(repoName) },
+        // { name: 'NEXT_PUBLIC_SUPABASE_URL', value: 'http://localhost:8000' },
+        // {
+        //   name: 'NEXT_PUBLIC_SUPABASE_KEY',
+        //   value:
+        //     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE',
+        // },
       ].map((body) =>
         githubApiClient.repos._owner(GITHUB_OWNER)._repo(repoName).actions.variables.$post({ body })
       )
